@@ -33,7 +33,7 @@ public class ObjectManager
 	public Verein newVerein() 
 	{
 		Verein v = new Verein();
-		verein.put(v.getVereinsId(), v);
+		verein.put(v.getVereinsID(), v);
 		return v;
 	}
 
@@ -67,7 +67,7 @@ public class ObjectManager
 	public Angebot newAngebot()
 	{
 		Angebot a = new Angebot();
-		angebot.put(a.getAngebotsID, a);
+		angebot.put(a.getAngebotsID(), a);
 		return a;
 	}
 	
@@ -88,11 +88,12 @@ public class ObjectManager
 		ResultSet rs = s.executeQuery("select * from vereine");
 		while (rs.next()) 
 		{
-			int vereinsid= rs.getInt(1);
+			int vereinsid = rs.getInt(1);
 			String vereinsname = rs.getString(2);
+			String vereinsort = rs.getString(3);
 			
-			Verein v = new Verein(vereinsid, vereinsname);
-			verein.put(v.getVereinsId(), v);
+			Verein v = new Verein(vereinsid, vereinsname, vereinsort);
+			verein.put(v.getVereinsID(), v);
 		}
 	}
 	
@@ -109,8 +110,27 @@ public class ObjectManager
 			Date geburtsdatum = rs.getDate(5);
 			int leistungswert = rs.getInt(6);
 			
-			Spieler s = new Spieler(spielerid, vereinsid, vorname, nachname, geburtsdatum, leistungswert);
-			verein.put(v.getVereinsId(), v);
+			Spieler sp = new Spieler(spielerid, vereinsid, vorname, nachname, geburtsdatum, leistungswert);
+			spieler.put(sp.getSpielerID(), sp);
+		}
+	}
+	
+	public void readAngebote() throws SQLException 
+	{
+		Statement s = db.createStatement();
+		ResultSet rs = s.executeQuery("select * from angebote");
+		while (rs.next()) 
+		{
+			int angebotsID = rs.getInt(1);
+			int vereinVon = rs.getInt(2);
+			int vereinAn = rs.getInt(3);
+			int spielerID = rs.getInt(4);
+			double gebot = rs.getDouble(5);
+			boolean istAngenommen = rs.getBoolean(6);
+			boolean istAbgeschlossen = rs.getBoolean(7);
+			
+			Angebot a = new Angebot(angebotsID, vereinVon, vereinAn, spielerID, gebot, istAngenommen, istAbgeschlossen);
+			angebot.put(a.getAngebotsID(), a);
 		}
 	}
 	
@@ -124,7 +144,7 @@ public class ObjectManager
 		} 
 		else if (v.isToDelete) 
 		{
-			verein.remove(v.getVereinsId());
+			verein.remove(v.getVereinsID());
 			// JDBC delete from db
 		} 
 		else if (v.isMod) 
