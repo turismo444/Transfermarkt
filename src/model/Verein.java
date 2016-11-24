@@ -5,6 +5,7 @@ public class Verein extends ObjectBase
 	static int lastNewNumber = 0; //für neu erzeugte VereinsIds
 	private int vereinsId;
 	String vereinsname;
+	private String vereinsort;
 	
 	/** Konstruktor zum Lesen aus der DB
 	 * @param vereinsId

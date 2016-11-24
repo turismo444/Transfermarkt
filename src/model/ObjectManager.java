@@ -20,6 +20,9 @@ public class ObjectManager
 	}
 	
 	HashMap<Integer, Verein> verein = new HashMap<Integer, Verein>();
+	HashMap<Integer, Angebot> angebot = new HashMap<Integer, Angebot>();
+	HashMap<Integer, Spieler> spieler = new HashMap<Integer, Spieler>();
+	
 	Connection db; // Muss noch ausgschiebn werdn
 	
 	public Verein newVerein() 
@@ -37,6 +40,12 @@ public class ObjectManager
 	public Collection<Verein> getAllVereine()
 	{
 		return verein.values();
+	}
+	
+	public Spieler newSpieler()
+	{
+		Spieler s = new Spieler();
+		spieler.put()
 	}
 	
 	// Einlesen aller vereine in die HashMap
