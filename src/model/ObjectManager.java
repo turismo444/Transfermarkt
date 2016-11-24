@@ -155,15 +155,60 @@ public class ObjectManager
 
 	void sStore(Spieler s)
 	{
-		
+		if(s.isNew)
+		{
+			s.isNew = false;
+		}
+		else if (s.isToDelete) 
+		{
+			spieler.remove(s.getSpielerID());
+			// JDBC delete from db
+		} 
+		else if (s.isMod) 
+		{
+			s.isMod = false;
+		}
+	}
+	
+	void aStore(Angebot a)
+	{
+		if(a.isNew)
+		{
+			a.isNew = false;
+		}
+		else if (a.isToDelete) 
+		{
+			angebot.remove(a.getAngebotsID());
+			// JDBC delete from db
+		} 
+		else if (a.isMod) 
+		{
+			a.isMod = false;
+		}
 	}
 	
 	//geht alle vereine durch und updatet jene, bei denen Änderungen vorliegen
-	void store()
+	void vStore()
 	{
 		for(Verein v: verein.values()) 
 		{
 			vStore(v);
+		}
+	}
+	
+	void sStore()
+	{
+		for(Spieler s: spieler.values()) 
+		{
+			sStore(s);
+		}
+	}
+	
+	void aStore()
+	{
+		for(Angebot a : angebot.values()) 
+		{
+			aStore(a);
 		}
 	}
 	
