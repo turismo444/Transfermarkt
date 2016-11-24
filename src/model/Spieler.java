@@ -5,7 +5,6 @@ public class Spieler extends ObjectBase
 {
 	static int lastNewNumber = 0;
 	
-	
 	private int spielerID;
 	private int vereinsID;
 	private String vorname;
