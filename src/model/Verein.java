@@ -1,9 +1,8 @@
 package model;
 
-public class Verein extends ObjectBase {
+public class Verein extends ObjectBase 
+{
 	static int lastNewNumber = 0; //für neu erzeugte VereinsIds
-	
-
 	private int vereinsId;
 	String vereinsname;
 	
