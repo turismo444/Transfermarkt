@@ -152,6 +152,11 @@ public class ObjectManager
 			v.isMod = false;
 		}
 	}
+
+	void sStore(Spieler s)
+	{
+		
+	}
 	
 	//geht alle vereine durch und updatet jene, bei denen Änderungen vorliegen
 	void store()
