@@ -25,13 +25,13 @@ public class Angebot extends ObjectBase
 		this.istAbgeschlossen = istAbgeschlossen;
 	}
 	
-	Angebot(int angebotsID, int vereinVon, int vereinAn, int spielerID, double gebot) {
+	Angebot() {
 		super();
 		this.angebotsID = --lastNewNumber;
-		this.vereinVon = vereinVon;
-		this.vereinAn = vereinAn;
-		this.spielerID = spielerID;
-		this.gebot = gebot;
+		this.vereinVon = 0;
+		this.vereinAn = 0;
+		this.spielerID = 0;
+		this.gebot = 0;
 		this.istAngenommen = false;
 		this.istAbgeschlossen = false;
 		isNew = true;
