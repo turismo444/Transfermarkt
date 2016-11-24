@@ -3,43 +3,62 @@ package model;
 public class Verein extends ObjectBase 
 {
 	static int lastNewNumber = 0; //für neu erzeugte VereinsIds
-	private int vereinsId;
-	String vereinsname;
+	
+	
+	private int vereinsID;
+	private String vereinsname;
 	private String vereinsort;
 	
 	/** Konstruktor zum Lesen aus der DB
 	 * @param vereinsId
 	 */
-	 Verein(int vereinsId, String vereinsname) {
+	Verein(int vereinsId, String vereinsname, String vereinsort) {
 		super();
-		this.vereinsId = vereinsId;
+		this.vereinsID = vereinsId;
 		this.vereinsname = vereinsname;
+		this.vereinsort = vereinsort;
 	}
 	
-	
-	/** Konstruktor zum Lesen aus der DB
-	 * @param vereinsId
-	 */
-     Verein() {
+    Verein() {
 		super();
-		this.vereinsId = --lastNewNumber;
-		this.vereinsname= "";
+		this.vereinsID = --lastNewNumber;
+		this.vereinsname = "";
+		this.vereinsort = "";
 		this.isNew = true;
 	}
 
 
-	public int getVereinsId() {
-		return vereinsId;
+	public int getVereinsID() {
+		return vereinsID;
 	}
 
-
-	public void setVereinsId(int vereinsId) {
-		if (this.vereinsId != vereinsId) {
-			this.vereinsId = vereinsId;
+	public void setVereinsID(int vereinsId) {
+		if (this.vereinsID != vereinsId) {
+			this.vereinsID = vereinsId;
 			isMod = true;
 		}
 	}
 
+	public String getVereinsname() {
+		return vereinsname;
+	}
 
+	public void setVereinsname(String vereinsname) {
+		if (this.vereinsname != vereinsname) {
+			this.vereinsname = vereinsname;
+			isMod = true;
+		}
+	}
+
+	public String getVereinsort() {
+		return vereinsort;
+	}
+
+	public void setVereinsort(String vereinsort) {
+		if (this.vereinsort != vereinsort) {
+			this.vereinsort = vereinsort;
+			isMod = true;
+		}
+	}
 	
 }

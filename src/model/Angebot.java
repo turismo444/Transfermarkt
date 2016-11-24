@@ -13,7 +13,7 @@ public class Angebot extends ObjectBase
 	private boolean istAbgeschlossen;
 	
 	
-	public Angebot(int angebotsID, int vereinVon, int vereinAn, int spielerID, double gebot, boolean istAngenommen,
+	Angebot(int angebotsID, int vereinVon, int vereinAn, int spielerID, double gebot, boolean istAngenommen,
 			boolean istAbgeschlossen) {
 		super();
 		this.angebotsID = angebotsID;
@@ -25,9 +25,9 @@ public class Angebot extends ObjectBase
 		this.istAbgeschlossen = istAbgeschlossen;
 	}
 	
-	public Angebot(int angebotsID, int vereinVon, int vereinAn, int spielerID, double gebot) {
+	Angebot(int angebotsID, int vereinVon, int vereinAn, int spielerID, double gebot) {
 		super();
-		this.angebotsID = lastNewNumber--;
+		this.angebotsID = --lastNewNumber;
 		this.vereinVon = vereinVon;
 		this.vereinAn = vereinAn;
 		this.spielerID = spielerID;

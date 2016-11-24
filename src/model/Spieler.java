@@ -13,7 +13,7 @@ public class Spieler extends ObjectBase
 	private int leistungswert;
 	
 	
-	public Spieler(int spielerID, int vereinsID, String vorname, String nachname, Date geburtsdatum,
+	Spieler(int spielerID, int vereinsID, String vorname, String nachname, Date geburtsdatum,
 			int leistungswert) {
 		super();
 		this.spielerID = spielerID;
@@ -24,9 +24,9 @@ public class Spieler extends ObjectBase
 		this.leistungswert = leistungswert;
 	}
 	
-	public Spieler() {
+	Spieler() {
 		super();
-		this.spielerID = lastNewNumber--;
+		this.spielerID = --lastNewNumber;
 		this.vereinsID = 0;
 		this.vorname = "";
 		this.nachname = "";
