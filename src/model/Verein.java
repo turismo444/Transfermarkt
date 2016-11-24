@@ -1,12 +1,6 @@
 package model;
 
-import java.sql.Connection;
-
-/**
- * @author ilker
- *
- */
-public class Verein extends DBObjectBase {
+public class Verein extends ObjectBase {
 	static int lastNewNumber = 0; //für neu erzeugte VereinsIds
 	
 

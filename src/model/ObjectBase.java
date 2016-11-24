@@ -1,10 +1,8 @@
 package model;
 
-import java.sql.Connection;
-
-public abstract class DBObjectBase {
+public abstract class ObjectBase 
+{
 	protected boolean isNew = false;
 	protected boolean isMod = false;
 	protected boolean isToDelete = false;
-	
 }
