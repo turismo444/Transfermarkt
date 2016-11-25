@@ -37,6 +37,10 @@ public class Angebot extends ObjectBase
 		isNew = true;
 	}
 
+	public Angebot() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getAngebotsID() {
 		return angebotsID;
 	}
