@@ -150,15 +150,25 @@ public class ObjectManager
 		} 
 		else if (v.isToDelete) 
 		{
-			verein.remove(v.getVereinsID());
-			
-			String sql = "DELETE FROM Vereine WHERE VereinsID = " + v.getVereinsID();
-			Statement stmt = db.prepareStatement(sql);
+			String sql = "DELETE FROM Vereine WHERE VereinsID = ?";
+			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
+			stmt.setInt(1, v.getVereinsID());
 			stmt.executeUpdate(sql);
 			stmt.close();
+			
+			v.isToDelete = false;
+			verein.remove(v.getVereinsID());
 		} 
 		else if (v.isMod) 
 		{
+			String sql = "UPDATE Vereine SET Vereinsname = ?, Vereinsort = ? WHERE VereinsID = ?";
+			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
+			stmt.setString(1, v.getVereinsname());
+			stmt.setString(2, v.getVereinsort());
+			stmt.setInt(3, v.getVereinsID());
+			stmt.executeUpdate(sql);
+			stmt.close();
+						
 			v.isMod = false;
 		}
 	}
@@ -223,6 +233,7 @@ public class ObjectManager
 			a.isMod = false;
 		}
 	}
+	
 	
 	// geht alle vereine durch und updatet jene, bei denen Änderungen vorliegen
 	void vStore() throws SQLException
