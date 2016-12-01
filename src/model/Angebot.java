@@ -24,7 +24,7 @@ public class Angebot extends ObjectBase
 		this.istAbgeschlossen = istAbgeschlossen;
 	}
 	
-	Angebot(int angebotsID, int vereinVon, int vereinAn, int spielerID, double gebot) 
+	Angebot() 
 	{
 		super();
 		this.angebotsID = --lastNewNumber;
@@ -36,10 +36,7 @@ public class Angebot extends ObjectBase
 		this.istAbgeschlossen = false;
 		isNew = true;
 	}
-
-	public Angebot() {
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	public int getAngebotsID() {
 		return angebotsID;
