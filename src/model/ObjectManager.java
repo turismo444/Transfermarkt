@@ -151,7 +151,11 @@ public class ObjectManager
 		else if (v.isToDelete) 
 		{
 			verein.remove(v.getVereinsID());
-			// JDBC delete from db
+			
+			String sql = "DELETE FROM Vereine WHERE VereinsID = " + v.getVereinsID();
+			Statement stmt = db.prepareStatement(sql);
+			stmt.executeUpdate(sql);
+			stmt.close();
 		} 
 		else if (v.isMod) 
 		{
