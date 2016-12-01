@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 public class ObjectManager 
 {
-
 	Connection db;
 	
 	// Singleton
@@ -81,7 +80,7 @@ public class ObjectManager
 		return angebot.values();
 	}
 	
-	// Einlesen aller vereine in die HashMap
+	// Einlesen aller Vereine in die HashMap
 	public void readVereine() throws SQLException
 	{
 		Statement s = db.createStatement();
@@ -187,7 +186,7 @@ public class ObjectManager
 		}
 	}
 	
-	//geht alle vereine durch und updatet jene, bei denen Änderungen vorliegen
+	// geht alle vereine durch und updatet jene, bei denen Änderungen vorliegen
 	void vStore()
 	{
 		for(Verein v: verein.values()) 
