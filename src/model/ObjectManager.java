@@ -134,11 +134,18 @@ public class ObjectManager
 	}
 	
 	// store speziell für vereine
-	void vStore(Verein v) 
+	void vStore(Verein v) throws SQLException 
 	{
 		if (v.isNew) 
 		{	
-			// JDBC
+			String sql = "INSERT INTO Vereine VALUES(?, ?, ?)";
+			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
+			stmt.setInt(1, v.getVereinsID());
+			stmt.setString(2, v.getVereinsname());
+			stmt.setString(3, v.getVereinsort());
+			stmt.executeUpdate(sql);
+			stmt.close();
+						
 			v.isNew = false;
 		} 
 		else if (v.isToDelete) 
@@ -187,7 +194,7 @@ public class ObjectManager
 	}
 	
 	// geht alle vereine durch und updatet jene, bei denen Änderungen vorliegen
-	void vStore()
+	void vStore() throws SQLException
 	{
 		for(Verein v: verein.values()) 
 		{
