@@ -12,9 +12,8 @@ public class Angebot extends ObjectBase
 	private boolean istAngenommen;
 	private boolean istAbgeschlossen;
 	
-	
-	Angebot(int angebotsID, int vereinVon, int vereinAn, int spielerID, double gebot, boolean istAngenommen,
-			boolean istAbgeschlossen) {
+	Angebot(int angebotsID, int vereinVon, int vereinAn, int spielerID, double gebot, boolean istAngenommen, boolean istAbgeschlossen) 
+	{
 		super();
 		this.angebotsID = angebotsID;
 		this.vereinVon = vereinVon;
@@ -25,7 +24,8 @@ public class Angebot extends ObjectBase
 		this.istAbgeschlossen = istAbgeschlossen;
 	}
 	
-	Angebot() {
+	Angebot(int angebotsID, int vereinVon, int vereinAn, int spielerID, double gebot) 
+	{
 		super();
 		this.angebotsID = --lastNewNumber;
 		this.vereinVon = 0;
@@ -116,6 +116,5 @@ public class Angebot extends ObjectBase
 			this.istAbgeschlossen = istAbgeschlossen;
 			isMod = true;
 		}
-	}
-	
+	}	
 }

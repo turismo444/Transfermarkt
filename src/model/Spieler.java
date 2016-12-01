@@ -12,9 +12,8 @@ public class Spieler extends ObjectBase
 	private Date geburtsdatum;
 	private int leistungswert;
 	
-	
-	Spieler(int spielerID, int vereinsID, String vorname, String nachname, Date geburtsdatum,
-			int leistungswert) {
+	Spieler(int spielerID, int vereinsID, String vorname, String nachname, Date geburtsdatum, int leistungswert) 
+	{
 		super();
 		this.spielerID = spielerID;
 		this.vereinsID = vereinsID;
@@ -24,7 +23,8 @@ public class Spieler extends ObjectBase
 		this.leistungswert = leistungswert;
 	}
 	
-	Spieler() {
+	Spieler() 
+	{
 		super();
 		this.spielerID = --lastNewNumber;
 		this.vereinsID = 0;
@@ -100,5 +100,4 @@ public class Spieler extends ObjectBase
 			isMod = true;
 		}
 	}
-	
 }

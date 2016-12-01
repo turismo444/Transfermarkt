@@ -4,7 +4,6 @@ public class Verein extends ObjectBase
 {
 	static int lastNewNumber = 0; //für neu erzeugte VereinsIds
 	
-	
 	private int vereinsID;
 	private String vereinsname;
 	private String vereinsort;
@@ -12,21 +11,22 @@ public class Verein extends ObjectBase
 	/** Konstruktor zum Lesen aus der DB
 	 * @param vereinsId
 	 */
-	Verein(int vereinsId, String vereinsname, String vereinsort) {
+	Verein(int vereinsId, String vereinsname, String vereinsort) 
+	{
 		super();
 		this.vereinsID = vereinsId;
 		this.vereinsname = vereinsname;
 		this.vereinsort = vereinsort;
 	}
 	
-    Verein() {
+    Verein() 
+    {
 		super();
 		this.vereinsID = --lastNewNumber;
 		this.vereinsname = "";
 		this.vereinsort = "";
 		this.isNew = true;
 	}
-
 
 	public int getVereinsID() {
 		return vereinsID;
@@ -60,5 +60,4 @@ public class Verein extends ObjectBase
 			isMod = true;
 		}
 	}
-	
 }
