@@ -8,11 +8,11 @@ public class Angebot extends ObjectBase
 	private int vereinVon;
 	private int vereinAn;
 	private int spielerID;
-	private double gebot;
+	private int gebot;
 	private boolean istAngenommen;
 	private boolean istAbgeschlossen;
 	
-	Angebot(int angebotsID, int vereinVon, int vereinAn, int spielerID, double gebot, boolean istAngenommen, boolean istAbgeschlossen) 
+	Angebot(int angebotsID, int vereinVon, int vereinAn, int spielerID, int gebot, boolean istAngenommen, boolean istAbgeschlossen) 
 	{
 		super();
 		this.angebotsID = angebotsID;
@@ -82,11 +82,11 @@ public class Angebot extends ObjectBase
 		}
 	}
 
-	public double getGebot() {
+	public int getGebot() {
 		return gebot;
 	}
 
-	public void setGebot(double gebot) {
+	public void setGebot(int gebot) {
 		if(gebot != this.gebot){
 			this.gebot = gebot;
 			isMod = true;

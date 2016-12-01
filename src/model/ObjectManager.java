@@ -1,8 +1,8 @@
 package model;
 
 import java.sql.*;
-import java.util.Collection;
-import java.util.HashMap;
+import java.sql.Date;
+import java.util.*;
 
 public class ObjectManager 
 {
@@ -124,7 +124,7 @@ public class ObjectManager
 			int vereinVon = rs.getInt(2);
 			int vereinAn = rs.getInt(3);
 			int spielerID = rs.getInt(4);
-			double gebot = rs.getDouble(5);
+			int gebot = rs.getInt(5);
 			boolean istAngenommen = rs.getBoolean(6);
 			boolean istAbgeschlossen = rs.getBoolean(7);
 			
@@ -163,16 +163,31 @@ public class ObjectManager
 		}
 	}
 
-	void sStore(Spieler s)
+	void sStore(Spieler s) throws SQLException
 	{
 		if(s.isNew)
 		{
+			String sql = "INSERT INTO Spieler VALUES(?, ?, ?, ?, ?, ?)";
+			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
+			stmt.setInt(1, s.getSpielerID());
+			stmt.setInt(2, s.getVereinsID());
+			stmt.setString(3, s.getVorname());
+			stmt.setString(4, s.getNachname());
+			stmt.setDate(5, s.getGeburtsdatum());
+			stmt.setInt(6, s.getLeistungswert());
+			stmt.executeUpdate(sql);
+			stmt.close();
+			
 			s.isNew = false;
 		}
 		else if (s.isToDelete) 
 		{
 			spieler.remove(s.getSpielerID());
-			// JDBC delete from db
+			
+			String sql = "DELETE FROM Spieler WHERE SpielerID = " + s.getSpielerID();
+			Statement stmt = db.prepareStatement(sql);
+			stmt.executeUpdate(sql);
+			stmt.close();
 		} 
 		else if (s.isMod) 
 		{
@@ -180,10 +195,22 @@ public class ObjectManager
 		}
 	}
 	
-	void aStore(Angebot a)
+	void aStore(Angebot a) throws SQLException
 	{
 		if(a.isNew)
 		{
+			String sql = "INSERT INTO Angebote VALUES(?, ?, ?, ?, ?, ?, ?)";
+			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
+			stmt.setInt(1, a.getAngebotsID());
+			stmt.setInt(2, a.getVereinVon());
+			stmt.setInt(3, a.getVereinAn());
+			stmt.setInt(4, a.getSpielerID());
+			stmt.setInt(5, a.getGebot());
+			stmt.setBoolean(6, a.isIstAngenommen());
+			stmt.setBoolean(7, a.isIstAbgeschlossen());
+			stmt.executeUpdate(sql);
+			stmt.close();
+			
 			a.isNew = false;
 		}
 		else if (a.isToDelete) 
@@ -206,7 +233,7 @@ public class ObjectManager
 		}
 	}
 	
-	void sStore()
+	void sStore() throws SQLException
 	{
 		for(Spieler s: spieler.values()) 
 		{
@@ -214,7 +241,7 @@ public class ObjectManager
 		}
 	}
 	
-	void aStore()
+	void aStore() throws SQLException
 	{
 		for(Angebot a : angebot.values()) 
 		{
