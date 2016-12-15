@@ -226,7 +226,11 @@ public class ObjectManager
 		else if (a.isToDelete) 
 		{
 			angebot.remove(a.getAngebotsID());
-			// JDBC delete from db
+			
+			String sql = "DELETE FROM Angebote WHERE AngebotsID = " + a.getAngebotsID();
+			Statement stmt = db.prepareStatement(sql);
+			stmt.executeUpdate(sql);
+			stmt.close();
 		} 
 		else if (a.isMod) 
 		{
