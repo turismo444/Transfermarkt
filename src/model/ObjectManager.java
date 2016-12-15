@@ -261,7 +261,6 @@ public class ObjectManager
 		}
 	}
 	
-	
 	// geht alle vereine durch und updatet jene, bei denen Änderungen vorliegen
 	void vStore() throws SQLException
 	{
