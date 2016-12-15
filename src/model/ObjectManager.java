@@ -201,6 +201,17 @@ public class ObjectManager
 		} 
 		else if (s.isMod) 
 		{
+			String sql = "UPDATE Spieler SET VereinsID = ?, Vorname = ?, Nachname = ?, Geburtsdatum = ?, Leistungswert = ?  WHERE SpielerID = ?";
+			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
+			stmt.setInt(1, s.getVereinsID());
+			stmt.setString(2, s.getVorname());
+			stmt.setString(3, s.getNachname());
+			stmt.setDate(4, s.getGeburtsdatum());
+			stmt.setInt(5, s.getLeistungswert());
+			stmt.setInt(6, s.getSpielerID());
+			stmt.executeUpdate(sql);
+			stmt.close();
+			
 			s.isMod = false;
 		}
 	}
@@ -234,6 +245,18 @@ public class ObjectManager
 		} 
 		else if (a.isMod) 
 		{
+			String sql = "UPDATE Angebote SET VereinVon = ?, VereinAn = ?, SpielerID = ?, Gebot = ?, istAngenommen = ?, istAbgeschlossen = ? WHERE AngebotsID = ?";
+			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
+			stmt.setInt(1, a.getVereinVon());
+			stmt.setInt(2, a.getVereinAn());
+			stmt.setInt(3, a.getSpielerID());
+			stmt.setInt(4, a.getGebot());
+			stmt.setBoolean(5, a.isIstAngenommen());
+			stmt.setBoolean(6, a.isIstAbgeschlossen());
+			stmt.setInt(7, a.getAngebotsID());
+			stmt.executeUpdate(sql);
+			stmt.close();
+			
 			a.isMod = false;
 		}
 	}
