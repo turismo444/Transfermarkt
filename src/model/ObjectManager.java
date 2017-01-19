@@ -143,7 +143,6 @@ public class ObjectManager
 		return angebot.values();
 	}
 	
-	// Einlesen aller Vereine in die HashMap
 	/**
 	 * Liest alle Vereine von der Datenbank in das Programm ein.
 	 * Diese Methode wird auch im Konstruktor ausgeführt
@@ -209,7 +208,6 @@ public class ObjectManager
 		}
 	}
 	
-	// store speziell für vereine
 	/**
 	 * Speichert bei Bedarf Veränderungen eines Vereins oder neue Vereine in der Datenbank ab.
 	 * Je Nach Neu, Modifiziert oder zu Löschen verhält sich diese Methode verschieden.
@@ -354,9 +352,9 @@ public class ObjectManager
 		}
 	}
 	
-	// geht alle vereine durch und updatet jene, bei denen Änderungen vorliegen
 	/**
 	 * Dies führt die Methode für die Speicherung des Vereins für alle Vereine aus.
+	 * Geht alle Vereine durch und updatet jene, bei denen Änderungen vorliegen
 	 * @throws SQLException
 	 */
 	void vStore() throws SQLException
