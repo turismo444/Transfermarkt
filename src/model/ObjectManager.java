@@ -15,12 +15,13 @@ public class ObjectManager
 	Connection db;
 	
 	/**
-	 * Singleton
+	 * Dies ist nötig, um aus dieser Klasse einen Singelton machen zu können.
 	 */
 	static ObjectManager instance = null;
 	
 	/**
-	 * 
+	 * Im Konstruktor wird die JDBC Verbindung zur Datenbank aufgebaut
+	 * und direkt alles aus der Datenbank eingelesen ins Programm.
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
@@ -33,7 +34,7 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Dies ist die Methode des Singleton-Patterns, um das einzige Objekt aufrufen zu können.
 	 * @return
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
@@ -45,14 +46,15 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Die Hashmaps dienen dazu, um effizienter durch die ID auf das Objekt zugreifen zu können.
 	 */
 	HashMap<Integer, Verein> verein = new HashMap<Integer, Verein>();
 	HashMap<Integer, Angebot> angebot = new HashMap<Integer, Angebot>();
 	HashMap<Integer, Spieler> spieler = new HashMap<Integer, Spieler>();
 	
 	/**
-	 * 
+	 * Mit dieser Methode erstellt man einen neuen Verien.
+	 * Beim erstellen eines neues Vereins wird sie direkt in die Hashmap eingetragen.
 	 * @return
 	 */
 	public Verein newVerein() 
@@ -63,7 +65,7 @@ public class ObjectManager
 	}
 
 	/**
-	 * 
+	 * Gibt den gewünschten Verein.
 	 * @param vereinsId
 	 * @return
 	 */
@@ -73,7 +75,7 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Gibt eine Collection mit alles Vereinen.
 	 * @return
 	 */
 	public Collection<Verein> getAllVereine()
@@ -82,7 +84,7 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Erstellt einen neuen Spieler
 	 * @return
 	 */
 	public Spieler newSpieler()
@@ -93,7 +95,7 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Gibt einen bestimmten Spieler.
 	 * @param spielerID
 	 * @return
 	 */
@@ -103,7 +105,7 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Gibt alle Spieler als Collection
 	 * @return
 	 */
 	public Collection<Spieler> getAllSpieler()
@@ -112,7 +114,7 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Erstellt neues eines Angebot
 	 * @return
 	 */
 	public Angebot newAngebot()
@@ -123,7 +125,7 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Gibt ein bestimmtes Angebot
 	 * @param angebotsID
 	 * @return
 	 */
@@ -133,7 +135,7 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Gibt alle Angebote als Collection
 	 * @return
 	 */
 	public Collection<Angebot> getAllAngebote()
@@ -143,7 +145,8 @@ public class ObjectManager
 	
 	// Einlesen aller Vereine in die HashMap
 	/**
-	 * 
+	 * Liest alle Vereine von der Datenbank in das Programm ein.
+	 * Diese Methode wird auch im Konstruktor ausgeführt
 	 * @throws SQLException
 	 */
 	public void readVereine() throws SQLException
@@ -162,7 +165,7 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Liest alle Spieler von der Datenbank in das Programm ein.
 	 * @throws SQLException
 	 */
 	public void readSpieler() throws SQLException 
@@ -184,7 +187,7 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Liest alle Angebote von der Datenbank in das Programm ein.
 	 * @throws SQLException
 	 */
 	public void readAngebote() throws SQLException 
@@ -208,7 +211,8 @@ public class ObjectManager
 	
 	// store speziell für vereine
 	/**
-	 * 
+	 * Speichert bei Bedarf Veränderungen eines Vereins oder neue Vereine in der Datenbank ab.
+	 * Je Nach Neu, Modifiziert oder zu Löschen verhält sich diese Methode verschieden.
 	 * @param v
 	 * @throws SQLException
 	 */
@@ -251,7 +255,8 @@ public class ObjectManager
 	}
 
 	/**
-	 * 
+	 * Speichert bei Bedarf Veränderungen eines Spielers oder neue Spieler in der Datenbank ab.
+	 * Je Nach Neu, Modifiziert oder zu Löschen verhält sich diese Methode verschieden.
 	 * @param s
 	 * @throws SQLException
 	 */
@@ -299,7 +304,8 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Speichert bei Bedarf Veränderungen eines Angebots oder neue Angebote in der Datenbank ab.
+	 * Je Nach Neu, Modifiziert oder zu Löschen verhält sich diese Methode verschieden.
 	 * @param a
 	 * @throws SQLException
 	 */
@@ -350,7 +356,7 @@ public class ObjectManager
 	
 	// geht alle vereine durch und updatet jene, bei denen Änderungen vorliegen
 	/**
-	 * 
+	 * Dies führt die Methode für die Speicherung des Vereins für alle Vereine aus.
 	 * @throws SQLException
 	 */
 	void vStore() throws SQLException
@@ -362,7 +368,7 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Dies führt die Methode für die Speicherung des Spieler für alle Vereine aus.
 	 * @throws SQLException
 	 */
 	void sStore() throws SQLException
@@ -374,7 +380,7 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Dies führt die Methode für die Speicherung des Angebote für alle Vereine aus.
 	 * @throws SQLException
 	 */
 	void aStore() throws SQLException
@@ -386,7 +392,7 @@ public class ObjectManager
 	}
 	
 	/**
-	 * 
+	 * Schließt die Verbundung zur Datenbank
 	 * @throws SQLException
 	 */
 	public void close() throws SQLException
