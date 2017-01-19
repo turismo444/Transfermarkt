@@ -19,7 +19,8 @@ public class Angebot extends ObjectBase
 	private boolean istAbgeschlossen;
 	
 	/**
-	 * 
+	 * Von diesem Konstruktor werden die Vereine erstellt, die von der Datenbank kommen.
+	 * Von ihnen sind alle Daten klar.
 	 * @param angebotsID
 	 * @param vereinVon
 	 * @param vereinAn
@@ -41,7 +42,9 @@ public class Angebot extends ObjectBase
 	}
 	
 	/**
-	 * 
+	 * Von diesem Konstruktur werden neue Vereine erstellt, die später in die Datenbank gespeißt werden
+	 * Da die AngebotsID nicht vom Benutzer kommt muss eine neue erstellt werden, 
+	 * so wird die static variable lastNewNumber angewendet
 	 */
 	Angebot() 
 	{
@@ -57,7 +60,9 @@ public class Angebot extends ObjectBase
 	}
 	
 	/**
-	 * 
+	 * AngebotsID getter
+	 * Die getter und setter Methoden sind dafür da, dass nicht direkt auf die Variable zugegriffen werden muss,
+	 * was die Sicherheit beeinträchtigen würde.
 	 * @return
 	 */
 	public int getAngebotsID() {
@@ -65,7 +70,9 @@ public class Angebot extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * AngebotsID setter
+	 * Wenn die gesetzte Variable nicht die Selbe ist, wird sie gesetzt.
+	 * Außerdem wird das Modifikationsflag gesetzt, wodurch in der Datenbank Upgedatet wird.
 	 * @param angebotsID
 	 */
 	public void setAngebotsID(int angebotsID) {
@@ -76,7 +83,7 @@ public class Angebot extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt den Verein, von dem das Angebot kommt
 	 * @return
 	 */
 	public int getVereinVon() {
@@ -84,7 +91,7 @@ public class Angebot extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt den Verein, von dem das Angebot kommt
 	 * @param vereinVon
 	 */
 	public void setVereinVon(int vereinVon) {
@@ -95,7 +102,7 @@ public class Angebot extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt den Verein, an dem das Angebot geht
 	 * @return
 	 */
 	public int getVereinAn() {
@@ -103,7 +110,7 @@ public class Angebot extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt den Verein, an dem das Angebot geht
 	 * @param vereinAn
 	 */
 	public void setVereinAn(int vereinAn) {
@@ -114,7 +121,7 @@ public class Angebot extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt die SpielerID des betreffenden Spielers
 	 * @return
 	 */
 	public int getSpielerID() {
@@ -122,7 +129,7 @@ public class Angebot extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt die SpielerID des betreffenden Spielers
 	 * @param spielerID
 	 */
 	public void setSpielerID(int spielerID) {
@@ -133,7 +140,7 @@ public class Angebot extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt den Betrag des Gebots
 	 * @return
 	 */
 	public int getGebot() {
@@ -141,7 +148,7 @@ public class Angebot extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt den Betrag des Gebots
 	 * @param gebot
 	 */
 	public void setGebot(int gebot) {
@@ -152,7 +159,7 @@ public class Angebot extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt, ob das Angebot angenommen wurde
 	 * @return
 	 */
 	public boolean isIstAngenommen() {
@@ -160,7 +167,7 @@ public class Angebot extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt, ob das Angebot angenommen wurde
 	 * @param istAngenommen
 	 */
 	public void setIstAngenommen(boolean istAngenommen) {
@@ -171,7 +178,7 @@ public class Angebot extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt, ob das Angebot abgeschlossen wurde
 	 * @return
 	 */
 	public boolean isIstAbgeschlossen() {
@@ -179,7 +186,7 @@ public class Angebot extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt, ob das Angebot abgeschlossen wurde
 	 * @param istAbgeschlossen
 	 */
 	public void setIstAbgeschlossen(boolean istAbgeschlossen) {
