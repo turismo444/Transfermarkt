@@ -1,3 +1,9 @@
+/**
+ * 
+ * @author Michael Krapf / Orcun Döger
+ * 
+ */
+
 package model;
 import java.sql.Date;
 
@@ -12,6 +18,15 @@ public class Spieler extends ObjectBase
 	private Date geburtsdatum;
 	private int leistungswert;
 	
+	/**
+	 * 
+	 * @param spielerID
+	 * @param vereinsID
+	 * @param vorname
+	 * @param nachname
+	 * @param geburtsdatum
+	 * @param leistungswert
+	 */
 	Spieler(int spielerID, int vereinsID, String vorname, String nachname, Date geburtsdatum, int leistungswert) 
 	{
 		super();
@@ -23,6 +38,9 @@ public class Spieler extends ObjectBase
 		this.leistungswert = leistungswert;
 	}
 	
+	/**
+	 * 
+	 */
 	Spieler() 
 	{
 		super();
@@ -35,10 +53,18 @@ public class Spieler extends ObjectBase
 		this.isNew = true;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getSpielerID() {
 		return spielerID;
 	}
 
+	/**
+	 * 
+	 * @param spielerID
+	 */
 	public void setSpielerID(int spielerID) {
 		if(spielerID != this.spielerID){
 			this.spielerID = spielerID;
@@ -46,10 +72,18 @@ public class Spieler extends ObjectBase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getVereinsID() {
 		return vereinsID;
 	}
-
+	
+	/**
+	 * 
+	 * @param vereinsID
+	 */
 	public void setVereinsID(int vereinsID) {
 		if (this.vereinsID != vereinsID) {
 			this.vereinsID = vereinsID;
@@ -57,10 +91,18 @@ public class Spieler extends ObjectBase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getVorname() {
 		return vorname;
 	}
 
+	/**
+	 * 
+	 * @param vorname
+	 */
 	public void setVorname(String vorname) {
 		if (this.vorname != vorname) {
 			this.vorname = vorname;
@@ -68,10 +110,18 @@ public class Spieler extends ObjectBase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getNachname() {
 		return nachname;
 	}
 
+	/**
+	 * 
+	 * @param nachname
+	 */
 	public void setNachname(String nachname) {
 		if (this.nachname != nachname) {
 			this.nachname = nachname;
@@ -79,10 +129,18 @@ public class Spieler extends ObjectBase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Date getGeburtsdatum() {
 		return geburtsdatum;
 	}
 
+	/**
+	 * 
+	 * @param geburtsdatum
+	 */
 	public void setGeburtsdatum(Date geburtsdatum) {
 		if (this.geburtsdatum != geburtsdatum) {
 			this.geburtsdatum = geburtsdatum;
@@ -90,10 +148,18 @@ public class Spieler extends ObjectBase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getLeistungswert() {
 		return leistungswert;
 	}
 
+	/**
+	 * 
+	 * @param leistungswert
+	 */
 	public void setLeistungswert(int leistungswert) {
 		if (this.leistungswert != leistungswert) {
 			this.leistungswert = leistungswert;

@@ -1,3 +1,9 @@
+/**
+ * 
+ * @author Michael Krapf / Orcun Döger
+ * 
+ */
+
 package model;
 
 public abstract class ObjectBase 

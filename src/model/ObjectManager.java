@@ -1,3 +1,9 @@
+/**
+ * 
+ * @author Michael Krapf / Orcun Döger
+ * 
+ */
+
 package model;
 
 import java.sql.*;
@@ -11,6 +17,11 @@ public class ObjectManager
 	// Singleton
 	static ObjectManager instance = null;
 	
+	/**
+	 * 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	private ObjectManager() throws SQLException, ClassNotFoundException 
 	{
 		Class.forName("com.mysql.jdbc.Driver");
@@ -19,16 +30,29 @@ public class ObjectManager
 		readVereine();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	static ObjectManager getInstance() throws SQLException, ClassNotFoundException 
 	{
 		if (instance == null) instance = new ObjectManager();
 		return instance;
 	}
 	
+	/**
+	 * 
+	 */
 	HashMap<Integer, Verein> verein = new HashMap<Integer, Verein>();
 	HashMap<Integer, Angebot> angebot = new HashMap<Integer, Angebot>();
 	HashMap<Integer, Spieler> spieler = new HashMap<Integer, Spieler>();
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Verein newVerein() 
 	{
 		Verein v = new Verein();
@@ -36,16 +60,29 @@ public class ObjectManager
 		return v;
 	}
 
+	/**
+	 * 
+	 * @param vereinsId
+	 * @return
+	 */
 	public Verein getVerein(int vereinsId)
 	{
 		return verein.get(vereinsId);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Collection<Verein> getAllVereine()
 	{
 		return verein.values();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Spieler newSpieler()
 	{
 		Spieler s = new Spieler();
@@ -53,16 +90,29 @@ public class ObjectManager
 		return s;
 	}
 	
+	/**
+	 * 
+	 * @param spielerID
+	 * @return
+	 */
 	public Spieler getSpieler(int spielerID)
 	{
 		return spieler.get(spielerID);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Collection<Spieler> getAllSpieler()
 	{
 		return spieler.values();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Angebot newAngebot()
 	{
 		Angebot a = new Angebot();
@@ -70,17 +120,30 @@ public class ObjectManager
 		return a;
 	}
 	
+	/**
+	 * 
+	 * @param angebotsID
+	 * @return
+	 */
 	public Angebot getAngebot(int angebotsID)
 	{
 		return angebot.get(angebotsID);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Collection<Angebot> getAllAngebote()
 	{
 		return angebot.values();
 	}
 	
 	// Einlesen aller Vereine in die HashMap
+	/**
+	 * 
+	 * @throws SQLException
+	 */
 	public void readVereine() throws SQLException
 	{
 		Statement s = db.createStatement();
@@ -96,6 +159,10 @@ public class ObjectManager
 		}
 	}
 	
+	/**
+	 * 
+	 * @throws SQLException
+	 */
 	public void readSpieler() throws SQLException 
 	{
 		Statement s = db.createStatement();
@@ -114,6 +181,10 @@ public class ObjectManager
 		}
 	}
 	
+	/**
+	 * 
+	 * @throws SQLException
+	 */
 	public void readAngebote() throws SQLException 
 	{
 		Statement s = db.createStatement();
@@ -134,6 +205,11 @@ public class ObjectManager
 	}
 	
 	// store speziell für vereine
+	/**
+	 * 
+	 * @param v
+	 * @throws SQLException
+	 */
 	void vStore(Verein v) throws SQLException 
 	{
 		if (v.isNew) 
@@ -173,6 +249,11 @@ public class ObjectManager
 		}
 	}
 
+	/**
+	 * 
+	 * @param s
+	 * @throws SQLException
+	 */
 	void sStore(Spieler s) throws SQLException
 	{
 		if(s.isNew)
@@ -216,6 +297,11 @@ public class ObjectManager
 		}
 	}
 	
+	/**
+	 * 
+	 * @param a
+	 * @throws SQLException
+	 */
 	void aStore(Angebot a) throws SQLException
 	{
 		if(a.isNew)
@@ -262,6 +348,10 @@ public class ObjectManager
 	}
 	
 	// geht alle vereine durch und updatet jene, bei denen Änderungen vorliegen
+	/**
+	 * 
+	 * @throws SQLException
+	 */
 	void vStore() throws SQLException
 	{
 		for(Verein v: verein.values()) 
@@ -270,6 +360,10 @@ public class ObjectManager
 		}
 	}
 	
+	/**
+	 * 
+	 * @throws SQLException
+	 */
 	void sStore() throws SQLException
 	{
 		for(Spieler s: spieler.values()) 
@@ -278,6 +372,10 @@ public class ObjectManager
 		}
 	}
 	
+	/**
+	 * 
+	 * @throws SQLException
+	 */
 	void aStore() throws SQLException
 	{
 		for(Angebot a : angebot.values()) 
@@ -286,6 +384,10 @@ public class ObjectManager
 		}
 	}
 	
+	/**
+	 * 
+	 * @throws SQLException
+	 */
 	public void close() throws SQLException
 	{
 		db.close();

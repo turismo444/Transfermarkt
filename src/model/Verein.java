@@ -1,3 +1,9 @@
+/**
+ * 
+ * @author Michael Krapf / Orcun Döger
+ * 
+ */
+
 package model;
 
 public class Verein extends ObjectBase 
@@ -8,7 +14,8 @@ public class Verein extends ObjectBase
 	private String vereinsname;
 	private String vereinsort;
 	
-	/** Konstruktor zum Lesen aus der DB
+	/** 
+	 * Konstruktor zum Lesen aus der DB
 	 * @param vereinsId
 	 */
 	Verein(int vereinsId, String vereinsname, String vereinsort) 
@@ -19,6 +26,9 @@ public class Verein extends ObjectBase
 		this.vereinsort = vereinsort;
 	}
 	
+	/**
+	 * 
+	 */
     Verein() 
     {
 		super();
@@ -28,10 +38,18 @@ public class Verein extends ObjectBase
 		this.isNew = true;
 	}
 
+    /**
+     * 
+     * @return
+     */
 	public int getVereinsID() {
 		return vereinsID;
 	}
 
+	/**
+	 * 
+	 * @param vereinsId
+	 */
 	public void setVereinsID(int vereinsId) {
 		if (this.vereinsID != vereinsId) {
 			this.vereinsID = vereinsId;
@@ -39,10 +57,18 @@ public class Verein extends ObjectBase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getVereinsname() {
 		return vereinsname;
 	}
 
+	/**
+	 * 
+	 * @param vereinsname
+	 */
 	public void setVereinsname(String vereinsname) {
 		if (this.vereinsname != vereinsname) {
 			this.vereinsname = vereinsname;
@@ -50,10 +76,18 @@ public class Verein extends ObjectBase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getVereinsort() {
 		return vereinsort;
 	}
 
+	/**
+	 * 
+	 * @param vereinsort
+	 */
 	public void setVereinsort(String vereinsort) {
 		if (this.vereinsort != vereinsort) {
 			this.vereinsort = vereinsort;

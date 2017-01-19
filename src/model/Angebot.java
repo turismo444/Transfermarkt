@@ -1,3 +1,9 @@
+/**
+ * 
+ * @author Michael Krapf / Orcun Döger
+ * 
+ */
+
 package model;
 
 public class Angebot extends ObjectBase
@@ -12,6 +18,16 @@ public class Angebot extends ObjectBase
 	private boolean istAngenommen;
 	private boolean istAbgeschlossen;
 	
+	/**
+	 * 
+	 * @param angebotsID
+	 * @param vereinVon
+	 * @param vereinAn
+	 * @param spielerID
+	 * @param gebot
+	 * @param istAngenommen
+	 * @param istAbgeschlossen
+	 */
 	Angebot(int angebotsID, int vereinVon, int vereinAn, int spielerID, int gebot, boolean istAngenommen, boolean istAbgeschlossen) 
 	{
 		super();
@@ -24,6 +40,9 @@ public class Angebot extends ObjectBase
 		this.istAbgeschlossen = istAbgeschlossen;
 	}
 	
+	/**
+	 * 
+	 */
 	Angebot() 
 	{
 		super();
@@ -37,11 +56,18 @@ public class Angebot extends ObjectBase
 		isNew = true;
 	}
 	
-
+	/**
+	 * 
+	 * @return
+	 */
 	public int getAngebotsID() {
 		return angebotsID;
 	}
 
+	/**
+	 * 
+	 * @param angebotsID
+	 */
 	public void setAngebotsID(int angebotsID) {
 		if(angebotsID != this.angebotsID){
 			this.angebotsID = angebotsID;
@@ -49,10 +75,18 @@ public class Angebot extends ObjectBase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getVereinVon() {
 		return vereinVon;
 	}
 
+	/**
+	 * 
+	 * @param vereinVon
+	 */
 	public void setVereinVon(int vereinVon) {
 		if(vereinVon != this.vereinVon){
 			this.vereinVon = vereinVon;
@@ -60,10 +94,18 @@ public class Angebot extends ObjectBase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getVereinAn() {
 		return vereinAn;
 	}
 
+	/**
+	 * 
+	 * @param vereinAn
+	 */
 	public void setVereinAn(int vereinAn) {
 		if(vereinAn != this.vereinAn){
 			this.vereinAn = vereinAn;
@@ -71,10 +113,18 @@ public class Angebot extends ObjectBase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getSpielerID() {
 		return spielerID;
 	}
 
+	/**
+	 * 
+	 * @param spielerID
+	 */
 	public void setSpielerID(int spielerID) {
 		if(spielerID != this.spielerID){
 			this.spielerID = spielerID;
@@ -82,10 +132,18 @@ public class Angebot extends ObjectBase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getGebot() {
 		return gebot;
 	}
 
+	/**
+	 * 
+	 * @param gebot
+	 */
 	public void setGebot(int gebot) {
 		if(gebot != this.gebot){
 			this.gebot = gebot;
@@ -93,10 +151,18 @@ public class Angebot extends ObjectBase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isIstAngenommen() {
 		return istAngenommen;
 	}
 
+	/**
+	 * 
+	 * @param istAngenommen
+	 */
 	public void setIstAngenommen(boolean istAngenommen) {
 		if(istAngenommen != this.istAngenommen){
 			this.istAngenommen = istAngenommen;
@@ -104,10 +170,18 @@ public class Angebot extends ObjectBase
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isIstAbgeschlossen() {
 		return istAbgeschlossen;
 	}
 
+	/**
+	 * 
+	 * @param istAbgeschlossen
+	 */
 	public void setIstAbgeschlossen(boolean istAbgeschlossen) {
 		if(istAbgeschlossen != this.istAbgeschlossen){
 			this.istAbgeschlossen = istAbgeschlossen;
