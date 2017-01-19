@@ -226,9 +226,8 @@ public class ObjectManager
 		} 
 		else if (v.isToDelete) 
 		{
-			String sql = "DELETE FROM Vereine WHERE VereinsID = ?";
-			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
-			stmt.setInt(1, v.getVereinsID());
+			String sql = "DELETE FROM Vereine WHERE VereinsID = "+ v.getVereinsID();
+			Statement stmt = db.prepareStatement(sql);
 			stmt.executeUpdate(sql);
 			stmt.close();
 			
@@ -273,12 +272,12 @@ public class ObjectManager
 		}
 		else if (s.isToDelete) 
 		{
-			spieler.remove(s.getSpielerID());
-			
 			String sql = "DELETE FROM Spieler WHERE SpielerID = " + s.getSpielerID();
 			Statement stmt = db.prepareStatement(sql);
 			stmt.executeUpdate(sql);
 			stmt.close();
+
+			spieler.remove(s.getSpielerID());
 		} 
 		else if (s.isMod) 
 		{
@@ -321,13 +320,13 @@ public class ObjectManager
 			a.isNew = false;
 		}
 		else if (a.isToDelete) 
-		{
-			angebot.remove(a.getAngebotsID());
-			
+		{	
 			String sql = "DELETE FROM Angebote WHERE AngebotsID = " + a.getAngebotsID();
 			Statement stmt = db.prepareStatement(sql);
 			stmt.executeUpdate(sql);
 			stmt.close();
+
+			angebot.remove(a.getAngebotsID());
 		} 
 		else if (a.isMod) 
 		{
