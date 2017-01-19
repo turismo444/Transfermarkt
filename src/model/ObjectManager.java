@@ -14,7 +14,9 @@ public class ObjectManager
 {
 	Connection db;
 	
-	// Singleton
+	/**
+	 * Singleton
+	 */
 	static ObjectManager instance = null;
 	
 	/**

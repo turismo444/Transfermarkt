@@ -9,17 +9,19 @@ package model;
 public class Verein extends ObjectBase 
 {
 	/**
-	 * 
+	 * lastNewNumber -> für neu erzeugte VereinsIDs
 	 */
-	static int lastNewNumber = 0; //für neu erzeugte VereinsIds
+	static int lastNewNumber = 0;
 	
 	private int vereinsID;
 	private String vereinsname;
 	private String vereinsort;
 	
 	/** 
-	 * Konstruktor zum Lesen aus der DB
+	 * Default-Konstruktor zum Lesen aus der DB
 	 * @param vereinsId
+	 * @param vereinsname
+	 * @param vereinsort 
 	 */
 	Verein(int vereinsId, String vereinsname, String vereinsort) 
 	{
@@ -30,7 +32,7 @@ public class Verein extends ObjectBase
 	}
 	
 	/**
-	 * 
+	 * Default-Konstruktor ohne Parameter
 	 */
     Verein() 
     {
@@ -42,7 +44,7 @@ public class Verein extends ObjectBase
 	}
 
     /**
-     * 
+     * Gibt die VereinsID zurück
      * @return
      */
 	public int getVereinsID() {
@@ -50,7 +52,7 @@ public class Verein extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt die VereinsID
 	 * @param vereinsId
 	 */
 	public void setVereinsID(int vereinsId) {
@@ -61,7 +63,7 @@ public class Verein extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt den Vereinsnamen zurück
 	 * @return
 	 */
 	public String getVereinsname() {
@@ -69,7 +71,7 @@ public class Verein extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt den Vereinsnamen
 	 * @param vereinsname
 	 */
 	public void setVereinsname(String vereinsname) {
@@ -80,7 +82,7 @@ public class Verein extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt den Vereinsort zurück
 	 * @return
 	 */
 	public String getVereinsort() {
@@ -88,7 +90,7 @@ public class Verein extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt den Vereinsort
 	 * @param vereinsort
 	 */
 	public void setVereinsort(String vereinsort) {

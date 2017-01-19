@@ -19,6 +19,7 @@ public class Spieler extends ObjectBase
 	private int leistungswert;
 	
 	/**
+	 * Default-Konstruktor mit nachfolgenden Parametern 
 	 * 
 	 * @param spielerID
 	 * @param vereinsID
@@ -40,6 +41,8 @@ public class Spieler extends ObjectBase
 	
 	/**
 	 * 
+	 * Default-Konstruktor ohne Parameter
+	 * 
 	 */
 	Spieler() 
 	{
@@ -54,7 +57,7 @@ public class Spieler extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt die SpielerID zurück
 	 * @return
 	 */
 	public int getSpielerID() {
@@ -62,7 +65,7 @@ public class Spieler extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt die SpielerID
 	 * @param spielerID
 	 */
 	public void setSpielerID(int spielerID) {
@@ -73,7 +76,7 @@ public class Spieler extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt die VereinsID zurück
 	 * @return
 	 */
 	public int getVereinsID() {
@@ -81,7 +84,7 @@ public class Spieler extends ObjectBase
 	}
 	
 	/**
-	 * 
+	 * Setzt die VereinsID
 	 * @param vereinsID
 	 */
 	public void setVereinsID(int vereinsID) {
@@ -92,7 +95,7 @@ public class Spieler extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt den Vornamen zurück
 	 * @return
 	 */
 	public String getVorname() {
@@ -100,7 +103,7 @@ public class Spieler extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt den Vornamen
 	 * @param vorname
 	 */
 	public void setVorname(String vorname) {
@@ -111,7 +114,7 @@ public class Spieler extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt den Nachnamen zurück
 	 * @return
 	 */
 	public String getNachname() {
@@ -119,7 +122,7 @@ public class Spieler extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt den Nachnamen
 	 * @param nachname
 	 */
 	public void setNachname(String nachname) {
@@ -130,7 +133,7 @@ public class Spieler extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt das Geburtsdatum zurück
 	 * @return
 	 */
 	public Date getGeburtsdatum() {
@@ -138,7 +141,7 @@ public class Spieler extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt das Geburtsdatum
 	 * @param geburtsdatum
 	 */
 	public void setGeburtsdatum(Date geburtsdatum) {
@@ -149,7 +152,7 @@ public class Spieler extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Gibt den Leistungswert zurück
 	 * @return
 	 */
 	public int getLeistungswert() {
@@ -157,7 +160,7 @@ public class Spieler extends ObjectBase
 	}
 
 	/**
-	 * 
+	 * Setzt den Leistungswert
 	 * @param leistungswert
 	 */
 	public void setLeistungswert(int leistungswert) {
