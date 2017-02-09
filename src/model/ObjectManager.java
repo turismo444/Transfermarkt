@@ -389,6 +389,36 @@ public class ObjectManager
 		}
 	}
 	
+	public void saveCloseRS(ResultSet rs)
+	{
+		try
+		{
+			if(rs == null)
+			{
+				rs.close();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveCloseST(Statement stmt)
+	{
+		try
+		{
+			if(stmt == null)
+			{
+				stmt.close();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Schlieﬂt die Verbundung zur Datenbank
 	 * @throws SQLException
