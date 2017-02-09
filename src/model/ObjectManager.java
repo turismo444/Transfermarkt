@@ -148,26 +148,34 @@ public class ObjectManager
 	 * Diese Methode wird auch im Konstruktor ausgeführt
 	 * @throws SQLException
 	 */
-	public void readVereine() throws SQLException
+	public void readVereine()
 	{
-		Statement s = db.createStatement();
-		ResultSet rs = s.executeQuery("select * from vereine");
-		while (rs.next()) 
-		{
-			int vereinsid = rs.getInt(1);
-			String vereinsname = rs.getString(2);
-			String vereinsort = rs.getString(3);
+		try{
+			Statement s = db.createStatement();
+			ResultSet rs = s.executeQuery("select * from vereine");
+			while (rs.next()) 
+			{
+				int vereinsid = rs.getInt(1);
+				String vereinsname = rs.getString(2);
+				String vereinsort = rs.getString(3);
+				
+				Verein v = new Verein(vereinsid, vereinsname, vereinsort);
+				verein.put(v.getVereinsID(), v);
+			}
+		} 
+		catch (SQLException e) {}
+		finally{
 			
-			Verein v = new Verein(vereinsid, vereinsname, vereinsort);
-			verein.put(v.getVereinsID(), v);
 		}
+		
+		
 	}
 	
 	/**
 	 * Liest alle Spieler von der Datenbank in das Programm ein.
 	 * @throws SQLException
 	 */
-	public void readSpieler() throws SQLException 
+	public void readSpieler()
 	{
 		Statement s = db.createStatement();
 		ResultSet rs = s.executeQuery("select * from spieler");
@@ -189,7 +197,7 @@ public class ObjectManager
 	 * Liest alle Angebote von der Datenbank in das Programm ein.
 	 * @throws SQLException
 	 */
-	public void readAngebote() throws SQLException 
+	public void readAngebote()
 	{
 		Statement s = db.createStatement();
 		ResultSet rs = s.executeQuery("select * from angebote");
@@ -214,7 +222,7 @@ public class ObjectManager
 	 * @param v
 	 * @throws SQLException
 	 */
-	void vStore(Verein v) throws SQLException 
+	void vStore(Verein v)
 	{
 		if (v.isNew) 
 		{	
@@ -258,7 +266,7 @@ public class ObjectManager
 	 * @param s
 	 * @throws SQLException
 	 */
-	void sStore(Spieler s) throws SQLException
+	void sStore(Spieler s)
 	{
 		if(s.isNew)
 		{
@@ -307,7 +315,7 @@ public class ObjectManager
 	 * @param a
 	 * @throws SQLException
 	 */
-	void aStore(Angebot a) throws SQLException
+	void aStore(Angebot a)
 	{
 		if(a.isNew)
 		{
@@ -357,7 +365,7 @@ public class ObjectManager
 	 * Geht alle Vereine durch und updatet jene, bei denen Änderungen vorliegen
 	 * @throws SQLException
 	 */
-	void vStore() throws SQLException
+	void vStore()
 	{
 		for(Verein v: verein.values()) 
 		{
@@ -369,7 +377,7 @@ public class ObjectManager
 	 * Dies führt die Methode für die Speicherung des Spieler für alle Vereine aus.
 	 * @throws SQLException
 	 */
-	void sStore() throws SQLException
+	void sStore()
 	{
 		for(Spieler s: spieler.values()) 
 		{
@@ -381,7 +389,7 @@ public class ObjectManager
 	 * Dies führt die Methode für die Speicherung des Angebote für alle Vereine aus.
 	 * @throws SQLException
 	 */
-	void aStore() throws SQLException
+	void aStore()
 	{
 		for(Angebot a : angebot.values()) 
 		{
@@ -393,7 +401,7 @@ public class ObjectManager
 	 * Schließt die Verbundung zur Datenbank
 	 * @throws SQLException
 	 */
-	public void close() throws SQLException
+	public void close()
 	{
 		db.close();
 	}
