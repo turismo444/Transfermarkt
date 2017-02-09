@@ -406,6 +406,7 @@ public class ObjectManager
 				
 				a.isMod = false;
 			}
+		}
 		catch (SQLException e) {}
 		finally{
 			saveClosePS(stmt);
