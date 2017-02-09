@@ -150,9 +150,12 @@ public class ObjectManager
 	 */
 	public void readVereine()
 	{
+		Statement s = null;
+		ResultSet rs = null;
+		
 		try{
-			Statement s = db.createStatement();
-			ResultSet rs = s.executeQuery("select * from vereine");
+			s = db.createStatement();
+			rs = s.executeQuery("select * from vereine");
 			while (rs.next()) 
 			{
 				int vereinsid = rs.getInt(1);
@@ -165,7 +168,8 @@ public class ObjectManager
 		} 
 		catch (SQLException e) {}
 		finally{
-			
+			saveCloseRS(rs);
+			saveCloseST(s);
 		}
 		
 		
@@ -177,19 +181,29 @@ public class ObjectManager
 	 */
 	public void readSpieler()
 	{
-		Statement s = db.createStatement();
-		ResultSet rs = s.executeQuery("select * from spieler");
-		while (rs.next()) 
-		{
-			int spielerid = rs.getInt(1);
-			int vereinsid= rs.getInt(2);
-			String vorname = rs.getString(3);
-			String nachname = rs.getString(4);
-			Date geburtsdatum = rs.getDate(5);
-			int leistungswert = rs.getInt(6);
-			
-			Spieler sp = new Spieler(spielerid, vereinsid, vorname, nachname, geburtsdatum, leistungswert);
-			spieler.put(sp.getSpielerID(), sp);
+		Statement s = null;
+		ResultSet rs = null;
+		
+		try{
+			s = db.createStatement();
+			rs = s.executeQuery("select * from spieler");
+			while (rs.next()) 
+			{
+				int spielerid = rs.getInt(1);
+				int vereinsid= rs.getInt(2);
+				String vorname = rs.getString(3);
+				String nachname = rs.getString(4);
+				Date geburtsdatum = rs.getDate(5);
+				int leistungswert = rs.getInt(6);
+				
+				Spieler sp = new Spieler(spielerid, vereinsid, vorname, nachname, geburtsdatum, leistungswert);
+				spieler.put(sp.getSpielerID(), sp);
+			}
+		} 
+		catch (SQLException e) {}
+		finally{
+			saveCloseRS(rs);
+			saveCloseST(s);
 		}
 	}
 	
@@ -199,20 +213,30 @@ public class ObjectManager
 	 */
 	public void readAngebote()
 	{
-		Statement s = db.createStatement();
-		ResultSet rs = s.executeQuery("select * from angebote");
-		while (rs.next()) 
-		{
-			int angebotsID = rs.getInt(1);
-			int vereinVon = rs.getInt(2);
-			int vereinAn = rs.getInt(3);
-			int spielerID = rs.getInt(4);
-			int gebot = rs.getInt(5);
-			boolean istAngenommen = rs.getBoolean(6);
-			boolean istAbgeschlossen = rs.getBoolean(7);
-			
-			Angebot a = new Angebot(angebotsID, vereinVon, vereinAn, spielerID, gebot, istAngenommen, istAbgeschlossen);
-			angebot.put(a.getAngebotsID(), a);
+		Statement s = null;
+		ResultSet rs = null;
+		
+		try{
+			s = db.createStatement();
+			rs = s.executeQuery("select * from angebote");
+			while (rs.next()) 
+			{
+				int angebotsID = rs.getInt(1);
+				int vereinVon = rs.getInt(2);
+				int vereinAn = rs.getInt(3);
+				int spielerID = rs.getInt(4);
+				int gebot = rs.getInt(5);
+				boolean istAngenommen = rs.getBoolean(6);
+				boolean istAbgeschlossen = rs.getBoolean(7);
+				
+				Angebot a = new Angebot(angebotsID, vereinVon, vereinAn, spielerID, gebot, istAngenommen, istAbgeschlossen);
+				angebot.put(a.getAngebotsID(), a);
+			}
+		} 
+		catch (SQLException e) {}
+		finally{
+			saveCloseRS(rs);
+			saveCloseST(s);
 		}
 	}
 	
@@ -224,40 +248,50 @@ public class ObjectManager
 	 */
 	void vStore(Verein v)
 	{
-		if (v.isNew) 
-		{	
-			String sql = "INSERT INTO Vereine VALUES(?, ?, ?)";
-			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
-			stmt.setInt(1, v.getVereinsID());
-			stmt.setString(2, v.getVereinsname());
-			stmt.setString(3, v.getVereinsort());
-			stmt.executeUpdate(sql);
-			stmt.close();
-						
-			v.isNew = false;
+		PreparedStatement stmt = null;
+
+		try{
+			if (v.isNew) 
+			{	
+				String sql = "INSERT INTO Vereine VALUES(?, ?, ?)";
+				stmt = db.prepareStatement(sql);
+				stmt.setInt(1, v.getVereinsID());
+				stmt.setString(2, v.getVereinsname());
+				stmt.setString(3, v.getVereinsort());
+				stmt.executeUpdate(sql);
+				stmt.close();
+							
+				v.isNew = false;
+			} 
+			else if (v.isToDelete) 
+			{
+				String sql = "DELETE FROM Vereine WHERE VereinsID = ?";
+				stmt = db.prepareStatement(sql);
+				stmt.setInt(1, v.getVereinsID());
+				stmt.executeUpdate(sql);
+				stmt.close();
+				
+				v.isToDelete = false;
+				verein.remove(v.getVereinsID());
+			} 
+			else if (v.isMod) 
+			{
+				String sql = "UPDATE Vereine SET Vereinsname = ?, Vereinsort = ? WHERE VereinsID = ?";
+				stmt = db.prepareStatement(sql);
+				stmt.setString(1, v.getVereinsname());
+				stmt.setString(2, v.getVereinsort());
+				stmt.setInt(3, v.getVereinsID());
+				stmt.executeUpdate(sql);
+				stmt.close();
+							
+				v.isMod = false;
+			}
 		} 
-		else if (v.isToDelete) 
-		{
-			String sql = "DELETE FROM Vereine WHERE VereinsID = "+ v.getVereinsID();
-			Statement stmt = db.prepareStatement(sql);
-			stmt.executeUpdate(sql);
-			stmt.close();
-			
-			v.isToDelete = false;
-			verein.remove(v.getVereinsID());
-		} 
-		else if (v.isMod) 
-		{
-			String sql = "UPDATE Vereine SET Vereinsname = ?, Vereinsort = ? WHERE VereinsID = ?";
-			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
-			stmt.setString(1, v.getVereinsname());
-			stmt.setString(2, v.getVereinsort());
-			stmt.setInt(3, v.getVereinsID());
-			stmt.executeUpdate(sql);
-			stmt.close();
-						
-			v.isMod = false;
+		catch (SQLException e) {}
+		finally{
+			saveClosePS(stmt);
 		}
+		
 	}
 
 	/**
@@ -268,44 +302,54 @@ public class ObjectManager
 	 */
 	void sStore(Spieler s)
 	{
-		if(s.isNew)
-		{
-			String sql = "INSERT INTO Spieler VALUES(?, ?, ?, ?, ?, ?)";
-			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
-			stmt.setInt(1, s.getSpielerID());
-			stmt.setInt(2, s.getVereinsID());
-			stmt.setString(3, s.getVorname());
-			stmt.setString(4, s.getNachname());
-			stmt.setDate(5, s.getGeburtsdatum());
-			stmt.setInt(6, s.getLeistungswert());
-			stmt.executeUpdate(sql);
-			stmt.close();
-			
-			s.isNew = false;
-		}
-		else if (s.isToDelete) 
-		{
-			String sql = "DELETE FROM Spieler WHERE SpielerID = " + s.getSpielerID();
-			Statement stmt = db.prepareStatement(sql);
-			stmt.executeUpdate(sql);
-			stmt.close();
-
-			spieler.remove(s.getSpielerID());
+		PreparedStatement stmt = null;
+		
+		
+		try{
+			if(s.isNew)
+			{
+				String sql = "INSERT INTO Spieler VALUES(?, ?, ?, ?, ?, ?)";
+				stmt = db.prepareStatement(sql);
+				stmt.setInt(1, s.getSpielerID());
+				stmt.setInt(2, s.getVereinsID());
+				stmt.setString(3, s.getVorname());
+				stmt.setString(4, s.getNachname());
+				stmt.setDate(5, s.getGeburtsdatum());
+				stmt.setInt(6, s.getLeistungswert());
+				stmt.executeUpdate(sql);
+				stmt.close();
+				
+				s.isNew = false;
+			}
+			else if (s.isToDelete) 
+			{
+				String sql = "DELETE FROM Spieler WHERE SpielerID = ?";
+				stmt = db.prepareStatement(sql);
+				stmt.setInt(1, s.getSpielerID());
+				stmt.executeUpdate(sql);
+				stmt.close();
+	
+				spieler.remove(s.getSpielerID());
+			} 
+			else if (s.isMod) 
+			{
+				String sql = "UPDATE Spieler SET VereinsID = ?, Vorname = ?, Nachname = ?, Geburtsdatum = ?, Leistungswert = ?  WHERE SpielerID = ?";
+				stmt = db.prepareStatement(sql);
+				stmt.setInt(1, s.getVereinsID());
+				stmt.setString(2, s.getVorname());
+				stmt.setString(3, s.getNachname());
+				stmt.setDate(4, s.getGeburtsdatum());
+				stmt.setInt(5, s.getLeistungswert());
+				stmt.setInt(6, s.getSpielerID());
+				stmt.executeUpdate(sql);
+				stmt.close();
+				
+				s.isMod = false;
+			}
 		} 
-		else if (s.isMod) 
-		{
-			String sql = "UPDATE Spieler SET VereinsID = ?, Vorname = ?, Nachname = ?, Geburtsdatum = ?, Leistungswert = ?  WHERE SpielerID = ?";
-			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
-			stmt.setInt(1, s.getVereinsID());
-			stmt.setString(2, s.getVorname());
-			stmt.setString(3, s.getNachname());
-			stmt.setDate(4, s.getGeburtsdatum());
-			stmt.setInt(5, s.getLeistungswert());
-			stmt.setInt(6, s.getSpielerID());
-			stmt.executeUpdate(sql);
-			stmt.close();
-			
-			s.isMod = false;
+		catch (SQLException e) {}
+		finally{
+			saveClosePS(stmt);
 		}
 	}
 	
@@ -317,46 +361,54 @@ public class ObjectManager
 	 */
 	void aStore(Angebot a)
 	{
-		if(a.isNew)
-		{
-			String sql = "INSERT INTO Angebote VALUES(?, ?, ?, ?, ?, ?, ?)";
-			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
-			stmt.setInt(1, a.getAngebotsID());
-			stmt.setInt(2, a.getVereinVon());
-			stmt.setInt(3, a.getVereinAn());
-			stmt.setInt(4, a.getSpielerID());
-			stmt.setInt(5, a.getGebot());
-			stmt.setBoolean(6, a.isIstAngenommen());
-			stmt.setBoolean(7, a.isIstAbgeschlossen());
-			stmt.executeUpdate(sql);
-			stmt.close();
-			
-			a.isNew = false;
-		}
-		else if (a.isToDelete) 
-		{	
-			String sql = "DELETE FROM Angebote WHERE AngebotsID = " + a.getAngebotsID();
-			Statement stmt = db.prepareStatement(sql);
-			stmt.executeUpdate(sql);
-			stmt.close();
-
-			angebot.remove(a.getAngebotsID());
-		} 
-		else if (a.isMod) 
-		{
-			String sql = "UPDATE Angebote SET VereinVon = ?, VereinAn = ?, SpielerID = ?, Gebot = ?, istAngenommen = ?, istAbgeschlossen = ? WHERE AngebotsID = ?";
-			java.sql.PreparedStatement stmt = db.prepareStatement(sql);
-			stmt.setInt(1, a.getVereinVon());
-			stmt.setInt(2, a.getVereinAn());
-			stmt.setInt(3, a.getSpielerID());
-			stmt.setInt(4, a.getGebot());
-			stmt.setBoolean(5, a.isIstAngenommen());
-			stmt.setBoolean(6, a.isIstAbgeschlossen());
-			stmt.setInt(7, a.getAngebotsID());
-			stmt.executeUpdate(sql);
-			stmt.close();
-			
-			a.isMod = false;
+		PreparedStatement stmt = null;
+		
+		try{
+			if(a.isNew)
+			{
+				String sql = "INSERT INTO Angebote VALUES(?, ?, ?, ?, ?, ?, ?)";
+				stmt = db.prepareStatement(sql);
+				stmt.setInt(1, a.getAngebotsID());
+				stmt.setInt(2, a.getVereinVon());
+				stmt.setInt(3, a.getVereinAn());
+				stmt.setInt(4, a.getSpielerID());
+				stmt.setInt(5, a.getGebot());
+				stmt.setBoolean(6, a.isIstAngenommen());
+				stmt.setBoolean(7, a.isIstAbgeschlossen());
+				stmt.executeUpdate(sql);
+				stmt.close();
+				
+				a.isNew = false;
+			}
+			else if (a.isToDelete) 
+			{	
+				String sql = "DELETE FROM Angebote WHERE AngebotsID = ?";
+				stmt = db.prepareStatement(sql);
+				stmt.setInt(1, a.getAngebotsID());
+				stmt.executeUpdate(sql);
+				stmt.close();
+	
+				angebot.remove(a.getAngebotsID());
+			} 
+			else if (a.isMod) 
+			{
+				String sql = "UPDATE Angebote SET VereinVon = ?, VereinAn = ?, SpielerID = ?, Gebot = ?, istAngenommen = ?, istAbgeschlossen = ? WHERE AngebotsID = ?";
+				stmt = db.prepareStatement(sql);
+				stmt.setInt(1, a.getVereinVon());
+				stmt.setInt(2, a.getVereinAn());
+				stmt.setInt(3, a.getSpielerID());
+				stmt.setInt(4, a.getGebot());
+				stmt.setBoolean(5, a.isIstAngenommen());
+				stmt.setBoolean(6, a.isIstAbgeschlossen());
+				stmt.setInt(7, a.getAngebotsID());
+				stmt.executeUpdate(sql);
+				stmt.close();
+				
+				a.isMod = false;
+			}
+		catch (SQLException e) {}
+		finally{
+			saveClosePS(stmt);
 		}
 	}
 	
@@ -427,11 +479,26 @@ public class ObjectManager
 		}
 	}
 	
+	public void saveClosePS(PreparedStatement stmt)
+	{
+		try
+		{
+			if(stmt == null)
+			{
+				stmt.close();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Schlieﬂt die Verbundung zur Datenbank
 	 * @throws SQLException
 	 */
-	public void close()
+	public void close() throws SQLException
 	{
 		db.close();
 	}
